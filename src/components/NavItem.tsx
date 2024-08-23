@@ -5,6 +5,7 @@ import { Button } from "./ui/button"
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import Link from "next/link";
 
 type Category = (typeof PRODUCT_CATEGORIES[number])
 
@@ -39,8 +40,10 @@ const NavItem = ({category, handleOpen, isOpen, isAnyOpen}: NavItemProps) => {
                     return (
                       <div key={item.name} className="group relative text-base sm:text-sm">
                         <div className="relative aspect-video rounded-lg overflow-hidden bg-muted group-hover:opacity-75">
-                          <Image src={item.imageSrc} alt={item.name}/>
+                          <Image src={item.imageSrc} alt={item.name} fill className="object-center object-cover"/>
                         </div>
+                        <Link href={item.href} className="mt-6 block font-medium text-secondary-foreground">{item.name}</Link>
+                        <p className="mt-1" aria-hidden="true">Shop now</p>
                       </div>
                     )
                   })}
