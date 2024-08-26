@@ -1,6 +1,7 @@
 import { webpackBundler } from "@payloadcms/bundler-webpack";
 import { mongooseAdapter } from "@payloadcms/db-mongodb";
 import { slateEditor } from "@payloadcms/richtext-slate";
+import path from "path";
 import { buildConfig } from "payload/config";
 
 export default buildConfig({
@@ -23,5 +24,8 @@ export default buildConfig({
   }),
   rateLimit: {
     max: 2000,
+  },
+  typescript: {
+    outputFile: path.resolve(__dirname, "payload-types.ts")
   }
 })
