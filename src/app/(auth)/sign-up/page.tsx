@@ -26,13 +26,6 @@ const Page = () => {
           <div className="flex flex-col items-center space-y-2 text-center">
             <Icons.logo className="h-20 w-20"/>
             <h1 className="text-2xl font-bold">Create an account</h1>
-            <p className="text-sm">
-              Already have an account?
-              {" "}
-              <Link href={"/sign-in"} className={buttonVariants({variant: "link", className: "pl-0"})}>
-                Sign in &rarr;
-              </Link>
-            </p>
             <div className="grid gap-6">
               <form>
                 <div className="grid gap-2">
@@ -53,6 +46,15 @@ const Page = () => {
                     />
                   </div>
                   <Button>Sign up</Button>
+                  <div className="justify-self-center pl-4">
+                    <p className="text-sm">
+                      Already have an account?
+                      {" "}
+                      <Link href={"/sign-in"} className={buttonVariants({variant: "link", className: "pl-0"})}>
+                        Sign in &rarr;
+                      </Link>
+                    </p>
+                  </div>
                 </div>
               </form>
             </div>
