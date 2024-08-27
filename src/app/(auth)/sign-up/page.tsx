@@ -16,7 +16,9 @@ const Page = () => {
     password: z.string().min(8, {message: "Password must be at least eight characters long."})
   })
 
-  const {register, handleSubmit, formState: {errors}} = useForm({
+  type TAuthCredentialsValidator = z.infer<typeof AuthCredentialsValidator>;
+
+  const {register, handleSubmit, formState: {errors}} = useForm<TAuthCredentialsValidator>({
     resolver: zodResolver(AuthCredentialsValidator)
   });
   return (
@@ -39,15 +41,17 @@ const Page = () => {
                   <div className="grid gap-1 py-2">
                     <Label className="justify-self-start" htmlFor="email">Email</Label>
                     <Input
+                    {...register("email")}
                     placeholder="name@example.com"
-                    className={cn({"focus-visible:ring-destructive": true})}
+                    className={cn({"focus-visible:ring-destructive": errors.email})}
                     />
                   </div>
                   <div className="grid gap-1 py-2">
                     <Label className="justify-self-start" htmlFor="password">Password</Label>
                     <Input
+                    {...register("password")}
                     placeholder="****"
-                    className={cn({"focus-visible:ring-destructive": true})}
+                    className={cn({"focus-visible:ring-destructive": errors.password})}
                     />
                   </div>
                   <Button>Sign up</Button>
