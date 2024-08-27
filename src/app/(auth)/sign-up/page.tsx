@@ -9,18 +9,16 @@ import Link from "next/link";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import { z } from "zod";
+import {AuthCredentialsValidator, TAuthCredentialsValidator } from "@/lib/validators/account-credentials-validator";
 
 const Page = () => {
-  const AuthCredentialsValidator = z.object({
-    email: z.string().email(),
-    password: z.string().min(8, {message: "Password must be at least eight characters long."})
-  })
-
-  type TAuthCredentialsValidator = z.infer<typeof AuthCredentialsValidator>;
-
   const {register, handleSubmit, formState: {errors}} = useForm<TAuthCredentialsValidator>({
     resolver: zodResolver(AuthCredentialsValidator)
   });
+
+  const onSubmit = ({email, password,}: TAuthCredentialsValidator) => {
+    // Send data to server
+  }
   return (
     <>
       <div className=" container relative flex pt-20 flex-col items-center justify-center lg:px-0">
