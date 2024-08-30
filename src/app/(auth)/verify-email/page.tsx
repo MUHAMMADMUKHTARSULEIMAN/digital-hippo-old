@@ -26,7 +26,11 @@ const VerifyEmailPage = ({searchParams}: VEPProps) => {
               <p className="text-muted-foreground text-center">
                 We&apos;ve sent a verification link to <span className="font-semibold">{toEmail}</span>.
               </p>
-            ) : null}
+            ) : (
+              <p className="text-muted-foreground text-center">
+                We&apos;ve sent a verification link to your email.
+              </p>
+            )}
           </div>
         )}
       </div>
