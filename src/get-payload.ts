@@ -2,9 +2,14 @@ import dotenv, { config } from "dotenv";
 import path from "path";
 import payload, { Payload } from "payload";
 import type { InitOptions } from "payload/config";
+import nodemailer from "nodemailer";
 
 dotenv.config({
   path: path.resolve(__dirname, "../.env"),
+})
+
+const transporter = nodemailer.createTransport({
+  host: "smtp.resend.com",
 })
 
 let cached = (global as any).payload;

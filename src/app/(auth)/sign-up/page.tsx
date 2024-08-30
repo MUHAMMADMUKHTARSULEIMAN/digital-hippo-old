@@ -32,7 +32,7 @@ const Page = () => {
             <Icons.logo className="h-20 w-20"/>
             <h1 className="text-2xl font-bold">Create an account</h1>
             <div className="grid gap-6">
-              <form>
+              <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="grid gap-2">
                   <div className="grid gap-1 py-2">
                     <Label className="justify-self-start" htmlFor="email">Email</Label>
@@ -46,22 +46,23 @@ const Page = () => {
                     <Label className="justify-self-start" htmlFor="password">Password</Label>
                     <Input
                     {...register("password")}
+                    type="password"
                     placeholder="****"
                     className={cn({"focus-visible:ring-destructive": errors.password})}
                     />
                   </div>
                   <Button>Sign up</Button>
-                  <div className="justify-self-center pl-4">
-                    <p className="text-sm">
-                      Already have an account?
-                      {" "}
-                      <Link href={"/sign-in"} className={buttonVariants({variant: "link", className: "pl-0"})}>
-                        Sign in &rarr;
-                      </Link>
-                    </p>
-                  </div>
                 </div>
               </form>
+            </div>
+            <div className="justify-self-center pl-4">
+              <p className="text-sm">
+                Already have an account?
+                {" "}
+                <Link href={"/sign-in"} className={buttonVariants({variant: "link", className: "pl-0"})}>
+                  Sign in &rarr;
+                </Link>
+              </p>
             </div>
           </div>
         </div>
