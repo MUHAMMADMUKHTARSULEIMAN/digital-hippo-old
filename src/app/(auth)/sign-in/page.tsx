@@ -20,11 +20,19 @@ const Page = () => {
   const isSeller = searchParams.get("as") === "seller"
   const origin = searchParams.get("origin")
 
+  const continueAsSeller = () => {
+    router.push("?as=seller")
+  };
+
+  const continueAsBuyer = () => {
+    router.replace("/sign-in", undefined)
+  }
+
   const {register, handleSubmit, formState: {errors}} = useForm<TAuthCredentialsValidator>({
     resolver: zodResolver(AuthCredentialsValidator)
   });
 
-  const {mutate, isLoading} = trpc.auth.signIn.useMutation({
+  const {mutate: signIn, isLoading} = trpc.auth.signIn.useMutation({
     onSuccess: () => {
       toast.success("Signed in successfully.")
 
@@ -32,13 +40,26 @@ const Page = () => {
 
       if(origin) {
         router.push(`/${origin}`);
+        return;
+      }
+
+      if(isSeller) {
+        router.push("/sell");
+        return;
+      }
+
+      router.push("/");
+    },
+    onError: (error) => {
+      if(error.data?.code === "UNAUTHORIZED") {
+        toast.error("Invalid email or password.")
       }
     }
   })
 
   const onSubmit = ({email, password,}: TAuthCredentialsValidator) => {
     // Send data to server
-    mutate({email, password})
+    signIn({email, password})
   }
   return (
     <>
@@ -76,21 +97,28 @@ const Page = () => {
                   <Button>Sign in</Button>
                 </div>
               </form>
-            </div>
-            <div className="justify-self-center pl-4">
-              <p className="text-sm">
-                Don&apos;t have an account?
-                {" "}
-                <Link href={"/sign-up"} className={buttonVariants({variant: "link", className: "pl-0"})}>
-                  Sign up &rarr;
-                </Link>
-              </p>
-            </div>
-
-            <div className="">
-              <div>
-
+              <div className="justify-self-center pl-4">
+                <p className="text-sm">
+                  Don&apos;t have an account?
+                  {" "}
+                  <Link href={"/sign-up"} className={buttonVariants({variant: "link", className: "pl-0"})}>
+                    Sign up &rarr;
+                  </Link>
+                </p>
               </div>
+              <div className="relative">
+                <div className="absolute inset-0 flex items-center" aria-hidden="true">
+                  <span className="w-full border-t"/>
+                </div>
+                <div className="relative flex justify-center text-xs uppercase">
+                  <span className="bg-background px-2 text-muted-foreground">OR</span>
+                </div>
+              </div>
+              {isSeller ? (
+                <Button>Continue as seller</Button>
+              ) : (
+                <Button>Continue as buyer</Button>
+              )}
             </div>
           </div>
         </div>
