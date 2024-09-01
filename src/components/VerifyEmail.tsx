@@ -9,17 +9,18 @@ interface VerifyEmailProps {
   token: string,
 }
 
-const dotsArray = [".", "..", "..."]
-let i = 0;
-setTimeout(() => {
-  setInterval(() => {
-    if(i === dotsArray.length) {
-      i = 0;
-    }
-    i++;
-    console.log(i)
-  }, 500);
-}, 2000);
+// const dotsArray = [".", "..", "..."]
+// let i = 0;
+// setTimeout(() => {
+//   setInterval(() => {
+//     if(i === 3) {
+//       i = 0;
+//     }
+//     i++;
+//     console.log(i)
+//   }, 500);
+// }, 2000)
+
 
 
 
@@ -43,7 +44,8 @@ const VerifyEmail = ({token}: VerifyEmailProps) => {
   //   return wayOut;
   // }
 
-  const {data, isLoading, isError} = trpc.auth.verifyEmail.useQuery({token,})
+  const {data, isLoading, isError} = trpc.auth.verifyEmail.useQuery({token,});
+
   if(isError) {
     return (
       <div className="flex flex-col h-full items-center justify-center gap-2">
@@ -65,15 +67,17 @@ const VerifyEmail = ({token}: VerifyEmailProps) => {
     )
   }
 
-  if(isLoading) {
+  if(true) {
     return (
       <div className="flex flex-col h-full items-center justify-center gap-2">
         <Loader2 className=" animate-spin h-20 w-20 text-zinc-300"/>
         <h3 className="font-semibold text-xl">
-          Verifying<span>...</span>
+          Verifying...
+          {/* <span className={i < 1 ? "hidden" : ""}>.</span>
+          <span className={i < 2 ? "hidden" : ""}>.</span>
+          <span className={i < 3 ? "hidden" : ""}>.</span> */}
         </h3>
         <p className="text-muted-foreground text-sm">This won&apos;t take long.</p>
-        
       </div>
     )
   }

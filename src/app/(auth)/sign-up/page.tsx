@@ -11,6 +11,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import {toast} from "sonner";
+import { ZodError } from "zod";
 
 const Page = () => {
   const {register, handleSubmit, formState: {errors}} = useForm<TAuthCredentialsValidator>({
@@ -21,6 +22,10 @@ const Page = () => {
     onError: (error) => {
       if(error.data?.code === "CONFLICT") {
         toast.error("This email is already in use. Did you mean to sign in?")
+      }
+
+      if(error instanceof ZodError) {
+        toast.error(error.issues[0].message)
       }
     }
   })
