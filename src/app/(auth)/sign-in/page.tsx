@@ -9,38 +9,30 @@ import { AuthCredentialsValidator, TAuthCredentialsValidator } from "@/lib/valid
 import { trpc } from "@/trpc/client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import {toast} from "sonner";
 import { ZodError } from "zod";
 
 const Page = () => {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const isSeller = searchParams.get("as") === "seller"
+  const origin = searchParams.get("origin")
+
   const {register, handleSubmit, formState: {errors}} = useForm<TAuthCredentialsValidator>({
     resolver: zodResolver(AuthCredentialsValidator)
   });
 
-  const router = useRouter();
+  const {mutate, isLoading} = trpc.auth.signIn.useMutation({
+    onSuccess: () => {
+      toast.success("Signed in successfully.")
 
-  const {mutate, isLoading} = trpc.auth.createPayloadUser.useMutation({
-    onError: (error) => {
-      if(error.data?.code === "CONFLICT") {
-        toast.error("This email is already in use. Did you mean to sign in?");
+      router.refresh()
 
-        return;
+      if(origin) {
+        router.push(`/${origin}`);
       }
-
-      if(error instanceof ZodError) {
-        toast.error(error.issues[0].message);
-
-        return;
-      }
-
-      toast.error("Something went wrong. Please try again.")
-    },
-
-    onSuccess: ({sentToEmail}) => {
-      toast.success(`Verification email sent to ${sentToEmail}.`);
-      router.push(`/verify-email?to=${sentToEmail}`);
     }
   })
 
@@ -54,7 +46,7 @@ const Page = () => {
         <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
           <div className="flex flex-col items-center space-y-2 text-center">
             <Icons.logo className="h-20 w-20"/>
-            <h1 className="text-2xl font-bold">Create an account</h1>
+            <h1 className="text-2xl font-bold">Sign in to your account</h1>
             <div className="grid gap-6">
               <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="grid gap-2">
@@ -81,18 +73,24 @@ const Page = () => {
                       <p className="text-sm text-destructive">{errors.password.message}</p>
                     )}
                   </div>
-                  <Button>Sign up</Button>
+                  <Button>Sign in</Button>
                 </div>
               </form>
             </div>
             <div className="justify-self-center pl-4">
               <p className="text-sm">
-                Already have an account?
+                Don&apos;t have an account?
                 {" "}
-                <Link href={"/sign-in"} className={buttonVariants({variant: "link", className: "pl-0"})}>
-                  Sign in &rarr;
+                <Link href={"/sign-up"} className={buttonVariants({variant: "link", className: "pl-0"})}>
+                  Sign up &rarr;
                 </Link>
               </p>
+            </div>
+
+            <div className="">
+              <div>
+
+              </div>
             </div>
           </div>
         </div>

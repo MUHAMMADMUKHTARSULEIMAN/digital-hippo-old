@@ -9,6 +9,7 @@ interface VerifyEmailProps {
   token: string,
 }
 
+
 // const dotsArray = [".", "..", "..."]
 // let i = 0;
 // setTimeout(() => {
@@ -20,9 +21,6 @@ interface VerifyEmailProps {
 //     console.log(i)
 //   }, 500);
 // }, 2000)
-
-
-
 
 
 const VerifyEmail = ({token}: VerifyEmailProps) => {
@@ -62,12 +60,12 @@ const VerifyEmail = ({token}: VerifyEmailProps) => {
         <CheckCircle className="h-20 w-20 text-green-600"/>
         <h3 className="font-semibold text-xl">You&apos;re all set!</h3>
         <p className="text-muted-foreground text-sm">Thanks for verifying your email. Welcome to Digital Hippo.</p>
-        <Link href={"/sign-in"} className={buttonVariants({variant: "link"})}>Sign in</Link>
+        <Link href={"/sign-in"} className={buttonVariants({className: "mb-4 mt-2"})}>Sign in</Link>
       </div>
     )
   }
 
-  if(true) {
+  if(isLoading) {
     return (
       <div className="flex flex-col h-full items-center justify-center gap-2">
         <Loader2 className=" animate-spin h-20 w-20 text-zinc-300"/>
