@@ -26,7 +26,7 @@ const Page = () => {
 
   const continueAsBuyer = () => {
     router.replace("/sign-in", undefined)
-  }
+  };
 
   const {register, handleSubmit, formState: {errors}} = useForm<TAuthCredentialsValidator>({
     resolver: zodResolver(AuthCredentialsValidator)
@@ -67,7 +67,7 @@ const Page = () => {
         <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
           <div className="flex flex-col items-center space-y-2 text-center">
             <Icons.logo className="h-20 w-20"/>
-            <h1 className="text-2xl font-bold">Sign in to your account</h1>
+            <h1 className="text-2xl font-bold">Sign in to your {isSeller ? "seller" : ""} account</h1>
             <div className="grid gap-6">
               <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="grid gap-2">
@@ -115,9 +115,9 @@ const Page = () => {
                 </div>
               </div>
               {isSeller ? (
-                <Button>Continue as seller</Button>
+                <Button disabled={isLoading} onClick={continueAsBuyer} variant="secondary" className="mb-8">Continue as buyer</Button>
               ) : (
-                <Button>Continue as buyer</Button>
+                <Button disabled={isLoading} onClick={continueAsSeller} variant="secondary" className="mb-8">Continue as seller</Button>
               )}
             </div>
           </div>
