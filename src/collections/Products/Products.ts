@@ -55,9 +55,40 @@ export const Products: CollectionConfig = {
       type: "text",
       admin: {
         hidden: true,
-      }
-      // required: true,
+      },
     },
+    {
+      name: "stripeId",
+      access: {
+        create: () => false,
+        read: () => false,
+        update: () => false,
+      },
+      label: "Category",
+      type: "text",
+      admin: {
+        hidden: true,
+      },
+    },
+    // {
+    //   name: "images",
+    //   label: "Product Images",
+    //   type: "array",
+    //   minRows: 1,
+    //   labels: {
+    //     singular: "image",
+    //     plural: "images",
+    //   },
+    //   fields: [
+    //     {
+    //       name: "image",
+    //       type: "upload",
+    //       relationTo: "media",
+    //       required: true,
+    //     },
+    //   ],
+    //   required: true,
+    // },
     // {
     //   name: "approvedForSale",
     //   label: "Product Status",
