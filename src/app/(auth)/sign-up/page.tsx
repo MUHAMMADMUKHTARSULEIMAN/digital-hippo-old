@@ -85,15 +85,15 @@ const Page = () => {
                   <Button>Sign up</Button>
                 </div>
               </form>
-            </div>
-            <div className="justify-self-center pl-4">
-              <p className="text-sm">
-                Already have an account?
-                {" "}
-                <Link href={"/sign-in"} className={buttonVariants({variant: "link", className: "pl-0"})}>
-                  Sign in &rarr;
-                </Link>
-              </p>
+              <div className="justify-self-center pl-4">
+                <p className="text-sm">
+                  Already have an account?
+                  {" "}
+                  <Link href={"/sign-in"} className={buttonVariants({variant: "link", className: "pl-0"})}>
+                    Sign in &rarr;
+                  </Link>
+                </p>
+              </div>
             </div>
           </div>
         </div>
