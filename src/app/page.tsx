@@ -44,7 +44,7 @@ export default function Home() {
         <MaxWidthWrapper className="py-20">
           <div className="grid grid-cols-1 gap-y-12 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-3 lg: gap-x-8 lg:gap-y-0" >
             {perks.map((perk) => (
-              <div key="perk.name" className="text-center md:items-start md:flex md:text-left lg:block lg:text-center">
+              <div key={perk.name} className="text-center md:items-start md:flex md:text-left lg:block lg:text-center">
                 <div className="flex md:flex-shrink-0 justify-center">
                   <div className="h-16 w-16 flex items-center justify-center rounded-full bg-yellow-100 text-yellow-900">
                     {<perk.icon className="w-1/3 h-1/3"/>}

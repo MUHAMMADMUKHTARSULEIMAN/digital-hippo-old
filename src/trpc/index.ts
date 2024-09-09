@@ -1,4 +1,3 @@
-import { NextPage } from 'next';
 import { z } from "zod";
 import { authRouter } from "./auth-router";
 import { publicProcedure, router } from "./trpc";
