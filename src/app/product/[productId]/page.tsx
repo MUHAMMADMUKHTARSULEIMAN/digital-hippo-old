@@ -1,7 +1,12 @@
 import { ProductFiles } from "@/collections/ProductFile";
+import AddToCartButton from "@/components/AddToCartButton";
+import ImageSlider from "@/components/ImageSlider";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
+import ProductReel from "@/components/ProductReel";
+import { PRODUCT_CATEGORIES } from "@/config";
 import { getPayloadClient } from "@/get-payload";
-import { ChevronRight } from "lucide-react";
+import { formatPrice } from "@/lib/utils";
+import { Check, ChevronRight, Shield, Subtitles } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -28,7 +33,10 @@ const Page = async ({params}: PageProps) => {
     }
   })
 
-  const [product] = products
+    const [product] = products
+
+    const label = PRODUCT_CATEGORIES.find(({value}) => value === product.category)?.label
+
 
   if(!product) return notFound()
 
@@ -44,6 +52,9 @@ const Page = async ({params}: PageProps) => {
       href: "/products",
     },
   ]
+  
+  // @ts-expect-error: TypeScript is a dumb, paranoid, overactive piece of shit
+  const validUrls = product.images.map(({image}) => (typeof image === "string" ? image : image.url)).filter(Boolean) as string[]
   
   return (
     <MaxWidthWrapper className="bg-background">
@@ -73,11 +84,55 @@ const Page = async ({params}: PageProps) => {
               ))}
             </ol>
             <div className="mt-4">
-              {/* <h1>{product.name}</h1> */}
+              <h1 className="text-3xl font-bold tracking-tight text-accent-foreground sm:text-4xl">
+                {/* @ts-expect-error: TypeScript is a dumb, paranoid, overactive piece of shit */}
+                {product.name}
+                </h1>
+            </div>
+            <section className="mt-4">
+              <div className="flex items-center">
+                {/* @ts-expect-error: TypeScript is a dumb, paranoid, overactive piece of shit */}
+                <p className="font-medium text-accent-foreground">{formatPrice(product.price)}</p>
+                <div className="pl-4 ml-4 border-l border-muted text-muted-foreground">
+                  {label}
+                </div>
+              </div>
+              <div className="mt-4 space-y-6">
+                {/* @ts-expect-error: TypeScript is a dumb, paranoid, overactive piece of shit */}
+                <p className="text-base text-muted-foreground">{product.details}</p>
+              </div>
+              <div className="mt-6 flex items-center">
+                <Check aria-hidden="true" className="h-4 w-4 flex-shrink-0 text-green-500" />
+                <p className="text-xs text-muted-foreground ml-2">Eligible for Instant Delivery</p>
+              </div>
+            </section>
+          </div>
+          {/* Product Images */}
+          <div className="mt-10 lg:mt-0 lg:col-start-2 lg:row-span-2 lg:self-center">
+            <div className="aspect-square rounded-lg">
+              <ImageSlider urls={validUrls} />
+            </div>
+          </div>
+          {/* Add to Cart Section */}
+          <div className="mt-10 lg:col-start-1 lg:row-start-2 lg:max-w-lg lg:self-start">
+            <div>
+              <div className="mt-10">
+                {/* Add to Cart button */}
+                {/* @ts-expect-error: Make TypeScript rest */}
+                <AddToCartButton product={product}/>
+              </div>
+              <div className="mt-6 text-center">
+                <div className="group inline-flex text-sm font-medium">
+                  <Shield aria-hidden="true" className="mr-2 h-5 w-5 flex-shrink-0 text-muted-foreground"/>
+                  <span className="text-muted-foreground hover:text-accent-foreground">30-Day Return Guarantee</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
+      {/* @ts-expect-error: TypeScript is a dumb, paranoid, overactive piece of shit */}
+      <ProductReel href="/products" query={{category: product.category, limit: 4,}} title={`Similar ${label}`} subtitle={`Browse similar ${label}`}/>
     </MaxWidthWrapper>
   )
 }

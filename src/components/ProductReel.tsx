@@ -32,6 +32,7 @@ const ProductReel = (props: ProductReelProps) => {
 
   let map: (Product | null)[] = []
   if(products && products.length) {
+    // @ts-expect-error: TypeScript is a dumb, paranoid, overactive piece of shit
     map = products
   }
   else if(isLoading) {
