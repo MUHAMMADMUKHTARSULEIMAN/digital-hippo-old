@@ -40,7 +40,7 @@ const Navbar = async () => {
                     </Link>
                   )}
                   <div className="ml-4 flow-root">
-                  <Cart />
+                    <Cart />
                   </div>
                 </div>
               </div>

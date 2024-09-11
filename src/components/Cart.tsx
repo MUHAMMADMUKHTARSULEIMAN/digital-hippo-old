@@ -33,14 +33,14 @@ const Cart = () => {
       </SheetTrigger>
       <SheetContent className="flex w-full flex-col pr-0 sm:max-w-lg">
         <SheetHeader className="space-y-2.5 pr-6">
-          <SheetTitle>Cart ({itemCount})</SheetTitle>
+          <SheetTitle>Cart ({isMounted ? itemCount : 0})</SheetTitle>
         </SheetHeader>
-        {itemCount > 0 ? (
+        { isMounted && itemCount > 0 ? (
           <>
           <div className="flex w-full flex-col pr-6">
             {/* To-do: cart logic */}
             <ScrollArea>
-              {items.map(({product}) => (
+              {isMounted && items.map(({product}) => (
                 <CartItem product={product} key={product.id} />
               ))}
             </ScrollArea>
