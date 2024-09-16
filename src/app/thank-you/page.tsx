@@ -6,6 +6,8 @@ import Image from "next/image";
 import { notFound, redirect } from "next/navigation";
 import { PRODUCT_CATEGORIES } from "@/config";
 import { formatPrice } from "@/lib/utils";
+import Link from "next/link";
+import { buttonVariants } from "@/components/ui/button";
 
 interface PageProps {
   searchParams: {
@@ -119,6 +121,9 @@ const Page = async ({searchParams}: PageProps) => {
                   <p className="text-base">Total</p>
                   <p className="text-base">{formatPrice(orderTotal + fee)}</p>
                 </div>
+              </div>
+              <div className="mt-16 py-6 border-t text-right">
+                <Link href="/products" className={buttonVariants({variant: "link"})}>Continue Shopping &rarr;</Link>
               </div>
             </div>
           </div>
