@@ -5,6 +5,7 @@ import { cookies } from "next/headers";
 import Image from "next/image";
 import { notFound, redirect } from "next/navigation";
 import { PRODUCT_CATEGORIES } from "@/config";
+import { formatPrice } from "@/lib/utils";
 
 interface PageProps {
   searchParams: {
@@ -70,7 +71,29 @@ const Page = async ({searchParams}: PageProps) => {
 
                   return (
                     <li key={product.id} className="flex space-x-6 py-6">
-                      <div className="relative h-24 w-24"></div>
+                      <div className="relative h-24 w-24">
+                        {typeof image !== "string" &&
+                        image.url &&
+                        <Image fill src={image.url} alt={`${product.name} Image`} className="flex-none rounded-md object-cover object-center bg-muted"/>}
+                      </div>
+                      <div className="flex-auto flex flex-col justify-between">
+                        <div className="space-y-1">
+                          <h3 className="text-accent-foreground">{product.name}</h3>
+                          <p className="my-1">Category: {label}</p>
+                        </div>
+                        {order._isPaid &&
+                          <a
+                          href={downloadUrl}
+                          download={product.name}
+                          className="text-primary-200 hover:underline "
+                          >
+                            Download Asset
+                          </a>
+                        }
+                      </div>
+                      <p className="flex-none font-medium text-accent-foreground">
+                        {formatPrice(product.price)}
+                      </p>
                     </li>
                   )
                 })}
