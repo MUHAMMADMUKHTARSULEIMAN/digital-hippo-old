@@ -32,6 +32,14 @@ const Page = async ({searchParams}: PageProps) => {
 
   const [order] = orders
 
+  const products = order.products as Product[]
+
+  const orderTotal = products.reduce((total, product) => {
+    return total + product.price
+  }, 0)
+
+  const fee = 1
+
   if(!order) return notFound()
 
   const orderUserId = typeof order.user === "string" ? order.user : order.user.id
@@ -98,6 +106,20 @@ const Page = async ({searchParams}: PageProps) => {
                   )
                 })}
               </ul>
+              <div className="space-y-6 border-t pt-6 font-medium text-sm text-muted-foreground">
+                <div className="flex justify-between">
+                  <p>Subtotal</p>
+                  <p className="text-accent-foreground">{formatPrice(orderTotal)}</p>
+                </div>
+                <div className="flex justify-between">
+                  <p>Transaction Fee</p>
+                  <p className="text-accent-foreground">{formatPrice(fee)}</p>
+                </div>
+                <div className="flex items-center justify-between border-t pt-6 text-accent-foreground">
+                  <p className="text-base">Total</p>
+                  <p className="text-base">{formatPrice(orderTotal + fee)}</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
