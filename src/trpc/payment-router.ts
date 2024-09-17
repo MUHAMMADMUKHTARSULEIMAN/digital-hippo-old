@@ -31,6 +31,7 @@ export const paymentRouter = router({
       collection: "orders",
       data: {
         _isPaid: false,
+        // @ts-expect-error
         products: filteredProducts.map((product) => product.id),
         user: user.id
       }
@@ -48,6 +49,7 @@ export const paymentRouter = router({
 
     filteredProducts.forEach((product) => {
       line_items.push({
+        // @ts-expect-error
         price: product.priceId!,
         quantity: 1,
       })

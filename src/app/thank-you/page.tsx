@@ -45,6 +45,7 @@ const Page = async ({searchParams}: PageProps) => {
 
   if(!order) return notFound()
 
+  //  @ts-expect-error
   const orderUserId = typeof order.user === "string" ? order.user : order.user.id
 
   if(orderUserId !== user?.id) {
@@ -66,7 +67,7 @@ const Page = async ({searchParams}: PageProps) => {
           <div className="lg:col-start-2">
             <p className="text-sm font-medium text-primary-600">Order Successful</p>
             <h1 className="mt-2 text-4xl font-bold tracking-tight text-accent-foreground sm:text-5xl">Thanks for Ordering</h1>
-            {order._isPaid ? <p className="mt-2 text-base text-muted-foreground">
+            {order._isPaid as boolean ? <p className="mt-2 text-base text-muted-foreground">
               Your order was processed and your assets are available for download. we&apos;ve sent your receipt and order details to {typeof order.user !== "string" && <span className="font-medium text-accent-foreground">order.user.email</span>}. 
             </p> : <p>
               Your order is being processed. Hang tight; we&apos;ll send you confirmation very soon.
@@ -92,7 +93,7 @@ const Page = async ({searchParams}: PageProps) => {
                           <h3 className="text-accent-foreground">{product.name}</h3>
                           <p className="my-1">Category: {label}</p>
                         </div>
-                        {order._isPaid &&
+                        {order._isPaid as boolean &&
                           <a
                           href={downloadUrl}
                           download={product.name}
@@ -124,6 +125,7 @@ const Page = async ({searchParams}: PageProps) => {
                 </div>
               </div>
               {/* Payment Status Component */}
+              {/* @ts-expect-error */}
               <PaymentStatus orderEmail={order.user.email} orderId={order.id} isPaid={order._isPaid}/>
               <div className="mt-16 py-6 border-t text-right">
                 <Link href="/products" className={buttonVariants({variant: "link"})}>Continue Shopping &rarr;</Link>
