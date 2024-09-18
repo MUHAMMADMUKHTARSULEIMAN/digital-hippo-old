@@ -53,7 +53,7 @@ const Page = async ({params}: PageProps) => {
     },
   ]
   
-  // @ts-expect-error: TypeScript is a dumb, paranoid, overactive piece of shit
+  // @ts-ignore: TypeScript is a dumb, paranoid, overactive piece of shit
   const validUrls = product.images.map(({image}) => (typeof image === "string" ? image : image.url)).filter(Boolean) as string[]
   
   return (
@@ -85,20 +85,20 @@ const Page = async ({params}: PageProps) => {
             </ol>
             <div className="mt-4">
               <h1 className="text-3xl font-bold tracking-tight text-accent-foreground sm:text-4xl">
-                {/* @ts-expect-error: TypeScript is a dumb, paranoid, overactive piece of shit */}
+                {/* @ts-ignore: TypeScript is a dumb, paranoid, overactive piece of shit */}
                 {product.name}
                 </h1>
             </div>
             <section className="mt-4">
               <div className="flex items-center">
-                {/* @ts-expect-error: TypeScript is a dumb, paranoid, overactive piece of shit */}
+                {/* @ts-ignore: TypeScript is a dumb, paranoid, overactive piece of shit */}
                 <p className="font-medium text-accent-foreground">{formatPrice(product.price)}</p>
                 <div className="pl-4 ml-4 border-l border-muted text-muted-foreground">
                   {label}
                 </div>
               </div>
               <div className="mt-4 space-y-6">
-                {/* @ts-expect-error: TypeScript is a dumb, paranoid, overactive piece of shit */}
+                {/* @ts-ignore: TypeScript is a dumb, paranoid, overactive piece of shit */}
                 <p className="text-base text-muted-foreground">{product.details}</p>
               </div>
               <div className="mt-6 flex items-center">
@@ -118,7 +118,7 @@ const Page = async ({params}: PageProps) => {
             <div>
               <div className="mt-10">
                 {/* Add to Cart button */}
-                {/* @ts-expect-error: Make TypeScript rest */}
+                {/* @ts-ignore: Make TypeScript rest */}
                 <AddToCartButton product={product}/>
               </div>
               <div className="mt-6 text-center">
@@ -131,7 +131,7 @@ const Page = async ({params}: PageProps) => {
           </div>
         </div>
       </div>
-      {/* @ts-expect-error: TypeScript is a dumb, paranoid, overactive piece of shit */}
+      {/* @ts-ignore: TypeScript is a dumb, paranoid, overactive piece of shit */}
       <ProductReel href="/products" query={{category: product.category, limit: 4,}} title={`Similar ${label}`} subtitle={`Browse similar ${label}`}/>
     </MaxWidthWrapper>
   )

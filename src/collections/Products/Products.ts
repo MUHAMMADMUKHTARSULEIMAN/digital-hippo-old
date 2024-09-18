@@ -11,7 +11,7 @@ const addUser: BeforeChangeHook<Product> = async ({req, data}) => {
 }
 
 // so named because I thought VS code was acting when I was the one who was a funny error
-//@ts-expect-error: shut up, TypeScript
+//@ts-ignore: shut up, TypeScript
 const myBad = async (args) => {
   if(args.operation === "create") {
     const data = args.data as Product

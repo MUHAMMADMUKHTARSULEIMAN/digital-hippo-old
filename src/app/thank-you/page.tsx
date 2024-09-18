@@ -45,7 +45,7 @@ const Page = async ({searchParams}: PageProps) => {
 
   if(!order) return notFound()
 
-  //  @ts-expect-error
+  //  @ts-ignore
   const orderUserId = typeof order.user === "string" ? order.user : order.user.id
 
   if(orderUserId !== user?.id) {
@@ -125,7 +125,7 @@ const Page = async ({searchParams}: PageProps) => {
                 </div>
               </div>
               {/* Payment Status Component */}
-              {/* @ts-expect-error */}
+              {/* @ts-ignore */}
               <PaymentStatus orderEmail={order.user.email} orderId={order.id} isPaid={order._isPaid}/>
               <div className="mt-16 py-6 border-t text-right">
                 <Link href="/products" className={buttonVariants({variant: "link"})}>Continue Shopping &rarr;</Link>

@@ -59,7 +59,7 @@ var addUser = function (_a) { return __awaiter(void 0, [_a], void 0, function (_
     });
 }); };
 // so named because I thought VS code was acting when I was the one who was a funny error
-//@ts-expect-error: shut up, TypeScript
+//@ts-ignore: shut up, TypeScript
 var myBad = function (args) { return __awaiter(void 0, void 0, void 0, function () {
     var data, createdProduct, created, data, updatedProduct, updated;
     return __generator(this, function (_a) {
