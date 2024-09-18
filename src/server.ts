@@ -16,10 +16,10 @@ const createContext = ({req, res}: trpcExpress.CreateExpressContextOptions) => (
 
 export type ExpressContext = inferAsyncReturnType<typeof createContext>;
 
-export type webhookRequest = IncomingMessage & {rawBody: Buffer}
+export type WebhookRequest = IncomingMessage & {rawBody: Buffer}
 
 const start = async () => {
-  const webhookMiddleware = bodyParser.json({verify: (req: webhookRequest, _, buffer) => {req.rawBody = buffer}})
+  const webhookMiddleware = bodyParser.json({verify: (req: WebhookRequest, _, buffer) => {req.rawBody = buffer}})
 
   app.post("/api/webhook/stripe", webhookMiddleware, stripeWebhookHandler)
 
@@ -37,11 +37,11 @@ const start = async () => {
   app.use((req, res) => nextHandler(req, res));
 
   nextApp.prepare().then(() => {
-    // payload.logger.info("Next.js started");
+    payload.logger.info("Next.js started");
   })
 
   app.listen(PORT, () => {
-    // payload.logger.info(`Next.js App URL: ${process.env.NEXT_PUBLIC_SERVER_URL}`)
+    payload.logger.info(`Next.js App URL: ${process.env.NEXT_PUBLIC_SERVER_URL}`)
   })
 }
 
