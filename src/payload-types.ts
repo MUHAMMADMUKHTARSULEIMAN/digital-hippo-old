@@ -55,7 +55,7 @@ export interface Product {
     image: string | Media;
     id?: string | null;
   }[];
-  approvedForSale: 'pending' | 'Approved' | 'Denied';
+  approvedForSale: 'pending' | 'approved' | 'denied';
   product_files: string | ProductFile;
   updatedAt: string;
   createdAt: string;

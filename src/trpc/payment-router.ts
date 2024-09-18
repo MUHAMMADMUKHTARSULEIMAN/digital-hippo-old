@@ -31,7 +31,7 @@ export const paymentRouter = router({
       collection: "orders",
       data: {
         _isPaid: false,
-        // @ts-expect-error
+        // @ts-ignore
         products: filteredProducts.map((product) => product.id),
         user: user.id
       }
@@ -49,7 +49,7 @@ export const paymentRouter = router({
 
     filteredProducts.forEach((product) => {
       line_items.push({
-        // @ts-expect-error
+        // @ts-ignore
         price: product.priceId!,
         quantity: 1,
       })
@@ -59,7 +59,7 @@ export const paymentRouter = router({
       const stripeSession = await stripe.checkout.sessions.create({
         success_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/thank-you?orderId=${order.id}`,
         cancel_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/cart`,
-        payment_method_types: ["card", "paypal"],
+        payment_method_types: ["card"],
         mode: "payment",
         metadata:{
           userId: user.id,
@@ -74,6 +74,7 @@ export const paymentRouter = router({
       return {url: null}
     }
   }),
+
   pollOrderStatus: privateProcedure.input(z.object({orderId: z.string()}))
   .query(async ({input}) => {
     const {orderId} = input

@@ -54,7 +54,7 @@ const Page = async ({searchParams}: PageProps) => {
   return (
     <main className="relative lg:min-h-full">
       <div className="hidden h-80 overflow-hidden lg:block lg:absolute lg:h-full lg:w-1/2 lg:pr-4 xl:pr12`">
-        <Image src="/checkout-thank-you.jpg" alt="Thank You" className="h-full w-full object-cover object-center"/>
+        <Image src="/checkout-thank-you.jpg" fill alt="Thank You" className="h-full w-full object-cover object-center"/>
       </div>
       <div>
         <div
@@ -65,11 +65,11 @@ const Page = async ({searchParams}: PageProps) => {
         xl:gap-x-24"
         >
           <div className="lg:col-start-2">
-            <p className="text-sm font-medium text-primary-600">Order Successful</p>
+            <p className="text-sm font-medium text-primary">Order Successful</p>
             <h1 className="mt-2 text-4xl font-bold tracking-tight text-accent-foreground sm:text-5xl">Thanks for Ordering</h1>
             {order._isPaid as boolean ? <p className="mt-2 text-base text-muted-foreground">
               Your order was processed and your assets are available for download. we&apos;ve sent your receipt and order details to {typeof order.user !== "string" && <span className="font-medium text-accent-foreground">order.user.email</span>}. 
-            </p> : <p>
+            </p> : <p className="mt-2 text-base text-muted-foreground">
               Your order is being processed. Hang tight; we&apos;ll send you confirmation very soon.
             </p>}
             <div className="mt-16 text-sm font-medium">
