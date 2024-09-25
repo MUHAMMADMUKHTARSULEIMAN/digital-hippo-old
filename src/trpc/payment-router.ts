@@ -12,7 +12,7 @@ export const paymentRouter = router({
     let {productIds} = input
 
     if(productIds.length === 0) {
-      return new TRPCError({code: "BAD_REQUEST"})
+      throw new TRPCError({code: "BAD_REQUEST"})
     }
 
     const payload = await getPayloadClient()
@@ -91,7 +91,7 @@ export const paymentRouter = router({
       }
     })
 
-    if(!orders.length) return new TRPCError({code: "NOT_FOUND"})
+    if(!orders.length) throw new TRPCError({code: "NOT_FOUND"})
 
     const [order] = orders
 

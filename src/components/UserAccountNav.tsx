@@ -21,7 +21,7 @@ const UserAccountNav = ({user}: {user: User}) => {
           }
         },
       )
-      if(!res.ok) return new Error();
+      if(!res.ok) throw new Error();
 
       toast.success("Signed out successfully.");
 

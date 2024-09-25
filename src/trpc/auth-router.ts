@@ -22,7 +22,7 @@ export const authRouter = router({
       }
     })
 
-    if(users.length !== 0) return new TRPCError({code: "CONFLICT"})
+    if(users.length !== 0) throw new TRPCError({code: "CONFLICT"})
 
     await payload.create({
       collection: "users",
@@ -45,7 +45,7 @@ export const authRouter = router({
       token,
     })
 
-    if(!isVerified) return new TRPCError({code: "UNAUTHORIZED"})
+    if(!isVerified) throw new TRPCError({code: "UNAUTHORIZED"})
 
     return {success: true};
   }),
@@ -69,7 +69,7 @@ export const authRouter = router({
       return {success: true};
     }
     catch (error) {
-      return new TRPCError({code: "UNAUTHORIZED"});
+      throw new TRPCError({code: "UNAUTHORIZED"});
     }
   }),
 })

@@ -6,13 +6,12 @@ import { PayloadRequest } from "payload/types";
 const t = initTRPC.context<ExpressContext>().create();
 
 const middleware = t.middleware
-// @ts-ignore
 const isAuth = middleware(async ({ctx, next}) => {
   const req = ctx.req as PayloadRequest
   const {user} = req as {user: User | null}
 
   if(!user ||!user.id) {
-    return new TRPCError({code: "UNAUTHORIZED"})
+    throw new TRPCError({code: "UNAUTHORIZED"})
   }
 
   return next({
