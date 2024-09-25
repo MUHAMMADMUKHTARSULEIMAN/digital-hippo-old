@@ -34,7 +34,8 @@ interface Args {
 
 export const getPayloadClient = async ({initOptions}: Args = {}): Promise<Payload> => {
   if(!process.env.PAYLOAD_SECRET) {
-    throw new Error("PAYLOAD_SECRET is missing")
+    // @ts-ignore
+    return {error: new Error("PAYLOAD_SECRET is missing")}
   }
 
   if(cached.client) {
@@ -58,7 +59,8 @@ export const getPayloadClient = async ({initOptions}: Args = {}): Promise<Payloa
     cached.client = cached.promise;
   } catch (error: unknown) {
     cached.promise = null;
-    throw error;
+    // @ts-ignore
+    return error;
   }
 
   return cached.client;

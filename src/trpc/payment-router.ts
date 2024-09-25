@@ -7,11 +7,12 @@ import type Stripe from "stripe";
 
 export const paymentRouter = router({
   createSession: privateProcedure.input(z.object({productIds: z.array(z.string())})).mutation(async ({ctx, input}) => {
+    // @ts-ignore
     const {user} = ctx
     let {productIds} = input
 
     if(productIds.length === 0) {
-      throw new TRPCError({code: "BAD_REQUEST"})
+      return new TRPCError({code: "BAD_REQUEST"})
     }
 
     const payload = await getPayloadClient()
@@ -90,7 +91,7 @@ export const paymentRouter = router({
       }
     })
 
-    if(!orders.length) throw new TRPCError({code: "NOT_FOUND"})
+    if(!orders.length) return new TRPCError({code: "NOT_FOUND"})
 
     const [order] = orders
 
