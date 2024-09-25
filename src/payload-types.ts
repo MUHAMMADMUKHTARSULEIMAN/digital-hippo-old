@@ -170,3 +170,8 @@ export interface PayloadMigration {
   updatedAt: string;
   createdAt: string;
 }
+
+
+declare module 'payload' {
+  export interface GeneratedTypes extends Config {}
+}
