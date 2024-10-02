@@ -10,7 +10,6 @@ import { stripeWebhookHandler } from "./webhooks";
 import nextBuild from "next/dist/build";
 import path from "path";
 import { PayloadRequest } from "payload/types";
-import { redirect } from "next/dist/server/api-utils";
 import { parse } from "url";
 
 

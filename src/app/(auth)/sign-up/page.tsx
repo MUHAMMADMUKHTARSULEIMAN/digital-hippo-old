@@ -38,6 +38,7 @@ const Page = () => {
       toast.error("Something went wrong. Please try again.")
     },
 
+    // @ts-ignore
     onSuccess: ({sentToEmail}) => {
       toast.success(`Verification email sent to ${sentToEmail}.`);
       router.push(`/verify-email?to=${sentToEmail}`);
