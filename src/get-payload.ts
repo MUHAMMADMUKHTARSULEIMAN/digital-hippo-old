@@ -35,7 +35,7 @@ interface Args {
 export const getPayloadClient = async ({initOptions}: Args = {}): Promise<Payload> => {
   if(!process.env.PAYLOAD_SECRET) {
     // @ts-ignore
-    return {error: new Error("PAYLOAD_SECRET is missing")}
+    return new Error("PAYLOAD_SECRET is missing")
   }
 
   if(cached.client) {

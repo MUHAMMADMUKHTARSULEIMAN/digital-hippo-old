@@ -2,7 +2,7 @@
 
 import { trpc } from "@/trpc/client";
 import { useRouter } from "next/navigation";
-import refresh from "payload/dist/auth/operations/refresh";
+// import refresh from "payload/dist/auth/operations/refresh";
 import { useEffect } from "react";
 
 interface PaymentStatusProps {

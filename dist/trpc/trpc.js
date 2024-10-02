@@ -9,8 +9,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g = Object.create((typeof Iterator === "function" ? Iterator : Object).prototype);
+    return g.next = verb(0), g["throw"] = verb(1), g["return"] = verb(2), typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
@@ -40,6 +40,7 @@ exports.privateProcedure = exports.publicProcedure = exports.router = void 0;
 var server_1 = require("@trpc/server");
 var t = server_1.initTRPC.context().create();
 var middleware = t.middleware;
+// @ts-ignore
 var isAuth = middleware(function (_a) { return __awaiter(void 0, [_a], void 0, function (_b) {
     var req, user;
     var ctx = _b.ctx, next = _b.next;
@@ -47,7 +48,7 @@ var isAuth = middleware(function (_a) { return __awaiter(void 0, [_a], void 0, f
         req = ctx.req;
         user = req.user;
         if (!user || !user.id) {
-            throw new server_1.TRPCError({ code: "UNAUTHORIZED" });
+            return [2 /*return*/, new server_1.TRPCError({ code: "UNAUTHORIZED" })];
         }
         return [2 /*return*/, next({
                 ctx: {
