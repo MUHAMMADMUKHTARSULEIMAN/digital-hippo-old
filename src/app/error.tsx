@@ -5,3 +5,5 @@ const error = ({error}: {error: Error}) => {
     <div>{error.message || "Something went wrong. Try again."}</div>
   )
 }
+
+export default error;
