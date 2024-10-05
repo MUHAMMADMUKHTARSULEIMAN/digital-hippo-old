@@ -24,7 +24,7 @@ const PaymentStatus = ({orderEmail, orderId, isPaid}: PaymentStatusProps) => {
     // @ts-ignore
     if(data?.isPaid) router.refresh()
       // @ts-ignore
-  }, [data?.isPaid, router])
+  }, [k.isPaid, router])
 
   return (
     <div className="mt-16 grid grid-cols-2 gap-x-4 text-sm text-ring">
