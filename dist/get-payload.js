@@ -93,10 +93,10 @@ var getPayloadClient = function () {
         return __generator(this, function (_c) {
             if (!process.env.PAYLOAD_SECRET) {
                 // @ts-ignore
-                return new Error("PAYLOAD_SECRET is missing");
+                return [2 /*return*/, new Error("PAYLOAD_SECRET is missing")];
             }
             if (cached.client) {
-                return cached.client;
+                return [2 /*return*/, cached.client];
             }
             if (!cached.promise) {
                 cached.promise = payload_1.default.init(__assign({ email: {
@@ -111,9 +111,9 @@ var getPayloadClient = function () {
             catch (error) {
                 cached.promise = null;
                 // @ts-ignore
-                return error;
+                return [2 /*return*/, error];
             }
-            return cached.client;
+            return [2 /*return*/, cached.client];
         });
     });
 };
